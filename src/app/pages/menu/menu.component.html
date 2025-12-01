@@ -1,0 +1,55 @@
+<section class="menu-hero">
+  <div class="content-wrapper">
+    <div class="specials-copy">
+      <h1>OUR MENU</h1>
+    </div>
+  </div>
+</section>
+
+<section class="menu-section">
+  <div class="content-wrapper menu-grid">
+  <article class="menu-block" *ngFor="let block of menuBlocks; let bIndex = index">
+      <header>
+        <div>
+          <h2>{{ block.title }}</h2>
+        </div>
+      </header>
+
+      <div class="block-section" *ngFor="let section of block.sections; let sIndex = index">
+        <p class="subtitle" *ngIf="section.subtitle">{{ section.subtitle }}</p>
+        <div class="items grid-3">
+          <ng-container *ngFor="let item of section.items; let i = index">
+            <!-- show only first 3 items unless this subsection is expanded -->
+            <button
+              class="menu-item"
+              [class.has-detail]="item.detail"
+              *ngIf="i < 3 || isSectionExpanded(bIndex, sIndex)"
+              (click)="toggleDetail(bIndex, sIndex, i)"
+              [class.expanded]="isExpanded(bIndex, sIndex, i)"
+              >
+              <div class="main">
+                <span class="label" title="{{ item.name }}">{{ item.name }}</span>
+                <!-- keep a single-line muted summary inside the pill -->
+                <small class="muted" *ngIf="item.detail">{{ item.detail }}</small>
+              </div>
+              <span class="price">{{ item.price }}</span>
+
+              <!-- full detail panel shown on hover (desktop) or on tap (mobile when expanded) -->
+              <div class="detail-panel" *ngIf="item.detail">
+                <div class="detail-inner">{{ item.detail }}</div>
+              </div>
+            </button>
+          </ng-container>
+
+          <!-- per-subsection view more/less button -->
+          <button
+            *ngIf="section.items.length > 3"
+            class="view-more"
+            (click)="toggleSection(bIndex, sIndex)">
+            {{ isSectionExpanded(bIndex, sIndex) ? 'View less' : 'View more' }}
+          </button>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>

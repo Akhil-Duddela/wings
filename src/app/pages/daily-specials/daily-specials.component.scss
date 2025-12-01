@@ -1,0 +1,198 @@
+.daily-hero {
+  background: url('../../../assets/image/hand-holding-plate-hot-wings-sauce.jpg') center/cover no-repeat;
+  position: relative;
+  color: #ffffff;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+}
+
+.daily-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* configurable overlay using --hero-overlay; fallback to 0.45 */
+  background: rgba(0,0,0,var(--hero-overlay, 0.45));
+  pointer-events: none;
+}
+
+/* modifiers */
+.daily-hero--light::before { background: rgba(0,0,0,0.22); }
+.daily-hero--dark::before { background: rgba(0,0,0,0.72); }
+
+.daily-hero .content-wrapper {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-block: 5rem;
+}
+
+.daily-grid {
+  background: #050505;
+  color: #ffffff;
+}
+
+.special-grid {
+  display: grid;
+  /* make daily cards match the feature/family card sizing by using a slightly larger min column
+     but keeping the same visual footprint as single feature cards */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.special-card {
+  background: #0f0f0f;
+  border-radius: 1.5rem;
+  padding: 1rem; /* tighter padding to match feature cards */
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  min-height: 120px; /* reduce height to match family/feature card footprint */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left !important;
+  position: relative;
+  overflow: hidden;
+}
+/* removed empty ruleset for .card-body to satisfy linter */
+.special-card .card-title {
+  /* Make the day label match section headers (orange) for emphasis */
+  color: var(--yellow);
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+  font-size: 0.95rem;
+}
+.special-card .card-sub {
+  color: #dcdcdc;
+  font-size: 0.85rem;
+  margin: 0.15rem 0 0;
+}
+.special-card .card-note {
+  color: #bfbfbf;
+  font-size: 0.78rem;
+  margin-top: 0.3rem;
+}
+.special-card .card-price {
+  color: #f3274c;
+  font-weight: 800;
+  white-space: nowrap;
+  /* keep price visually smaller to match family card */
+  font-size: 0.95rem;
+}
+
+.special-card header {
+  /* header for card: left block with title/subtitle, right price */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.special-card .card-header-left{
+  flex: 1 1 auto;
+  text-align: left; /* match feature cards */
+}
+
+.special-card h3 {
+  margin: 0 0 0.35rem;
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #f3274c;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.feature-section {
+  background: #000;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature-card {
+  background: #0d0d0d;
+  color: #ffffff;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.feature-grid.single {
+  display: block;
+  max-width: 360px;
+}
+
+.feature-card .card-price {
+  color: #f3274c;
+  font-weight: 800;
+  /* when used inside a header, it will align to the right due to space-between */
+  white-space: nowrap;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+}
+
+.feature-card header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.feature-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #d3d3d3;
+  line-height: 1.6;
+}
+  .specials-copy h1 {
+    font-size: clamp(3.8rem, 6.2vw, 8rem);
+    line-height: 0.95;
+  }
+
+/* Section headers with icon on right */
+.section-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin: 2rem 0 1rem;
+}
+.section-row.small{
+  margin-top: 2.5rem;
+}
+.section-title{
+  color: #f6a400; /* gold */
+  font-weight:700;
+  margin:0;
+}
+.section-title.small-title{
+  font-size:1.15rem;
+}
+.section-icon{
+  width:40px;
+  height:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0.95;
+}
+
+/* responsive tweaks */
+@media (max-width:640px){
+  .special-grid{ grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); }
+  .content-wrapper{ padding-inline: 1rem; }
+}

@@ -1,0 +1,82 @@
+<!-- Hero / Header image area -->
+<section class="hero">
+  <div class="content-wrapper">
+    <div class="specials-copy hero-copy">
+      <h1>Fuel Your Cravings.<br/>Fly with Flavor</h1>
+    </div>
+  </div>
+</section>
+
+<!-- Menu preview similar to design: three rounded cards with images -->
+<section class="menu-preview" id="menu">
+  <div class="content-wrapper">
+    <h2 class="section-title">Menu</h2>
+    <div class="card-grid">
+<article 
+  class="menu-card" 
+  *ngFor="let category of menuCategories; let i = index"
+  [ngClass]="{ 'center-image': i === 1 }">
+           <div class="card-body">
+          <h3>{{ category.title }}</h3>
+        </div>
+        <div class="image-frame">
+          <div class="image" [style.backgroundImage]="'url(' + category.image + ')'" aria-hidden="true"></div>
+        </div>
+       
+      </article>
+    </div>
+
+    <div class="center">
+      <a class="btn-orange" routerLink="/menu">View More</a>
+    </div>
+  </div>
+</section>
+
+<!-- Large Daily Specials band with image and floating card for deals -->
+<section class="daily-specials-band">
+  <div class="specials-visual">
+    <!-- big background image is set in SCSS using asset path -->
+    <div class="specials-copy">
+      <h1>DAILY<br/>SPECIALS</h1>
+    </div>
+
+    <aside class="specials-card">
+      <h4>DAILY SPECIALS &amp; Deals</h4>
+      <div class="deals">
+        <ng-container *ngFor="let deal of dailyDeals; let i = index">
+          <div class="deal" *ngIf="i < 2">
+            <div class="left">
+              <span class="day">{{ deal.day }}</span>
+            </div>
+            <div class="right">
+              <div class="name">{{ deal.name }}</div>
+              <div class="price">{{ deal.price }}</div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <a class="btn-small" routerLink="/daily-specials">View More Specials</a>
+    </aside>
+  </div>
+</section>
+
+<!-- small contact/visit strip (keeps existing info but simplified) -->
+<!-- <section class="contact-strip">
+  <div class="content-wrapper contact-grid">
+    <div>
+      <h3>Visit Us</h3>
+      <p>40-42 High Street, London, UK</p>
+    </div>
+    <div>
+      <h3>Call</h3>
+      <a href="tel:+441234567890">+44 123 456 7890</a>
+    </div>
+    <div>
+      <h3>Hours</h3>
+      <p>Mon - Sat 10am - 10pm</p>
+    </div>
+    <div class="contact-action">
+      <a class="btn-orange" routerLink="/contact">Contact Us</a>
+    </div>
+  </div>
+</section> -->

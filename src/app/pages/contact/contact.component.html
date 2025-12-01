@@ -1,0 +1,48 @@
+<section class="contact-wrapper">
+  <div class="content-wrapper contact-grid">
+    <aside class="contact-card">
+      <h2>Contact Information</h2>
+      <ul>
+        <li *ngFor="let item of contacts">
+          <span>{{ item.label }}</span>
+          <a *ngIf="item.href" [href]="item.href">{{ item.value }}</a>
+          <p *ngIf="!item.href">{{ item.value }}</p>
+        </li>
+      </ul>
+      <div class="hours">
+        <span>Hours</span>
+        <p>Mon - Thu: 10am - 10pm</p>
+        <p>Fri - Sat: 10am - 11:30pm</p>
+        <p>Sun: 11am - 9pm</p>
+      </div>
+    </aside>
+
+    <form class="contact-form" (submit)="$event.preventDefault()">
+      <div class="form-row">
+        <label>
+          Name
+          <input type="text" placeholder="Full Name" required />
+        </label>
+        <label>
+          Phone Number
+          <input type="tel" placeholder="(+1) 555-1234" required />
+        </label>
+      </div>
+      <div class="form-row">
+        <label>
+          Email
+          <input type="email" placeholder="you@email.com" required />
+        </label>
+        <label>
+          Visit Date
+          <input type="date" />
+        </label>
+      </div>
+      <label>
+        Message
+        <textarea rows="5" placeholder="Tell us about your order or event..."></textarea>
+      </label>
+      <button class="button-primary" type="submit">Submit</button>
+    </form>
+  </div>
+</section>

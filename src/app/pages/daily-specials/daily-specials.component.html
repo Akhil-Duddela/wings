@@ -1,0 +1,50 @@
+<section class="daily-hero">
+  <div class="content-wrapper">
+<div class="specials-copy">
+      <h1>DAILY<br/>SPECIALS</h1>
+    </div>
+  </div>
+</section>
+
+<section class="daily-grid">
+  <div class="content-wrapper">
+    <div class="section-row">
+      <h3 class="section-title small-title">Daily Specials</h3>
+
+    </div>
+
+    <div class="special-grid">
+      <article class="special-card" *ngFor="let special of dailySpecials">
+        <header class="card-header">
+          <div class="card-header-left">
+            <div class="card-title">{{ special.title }}</div>
+            <div class="card-sub">{{ special.subtitle }}</div>
+            <div class="card-note" *ngIf="special.note">{{ special.note }}</div>
+          </div>
+          <div class="card-price">{{ special.price }}</div>
+        </header>
+        <span class="badge" *ngIf="special.highlight">{{ special.highlight }}</span>
+      </article>
+    </div>
+
+    <!-- Feature/Deal sections (Family / Game / etc) rendered below as their own rows -->
+    <div class="deals-list">
+      <ng-container *ngFor="let block of featureBlocks">
+        <div class="section-row small">
+          <h3 class="section-title small-title">{{ block.title }}</h3>
+        </div>
+        <div class="feature-grid single">
+          <article class="feature-card">
+            <header class="card-header">
+              <div class="card-header-left">
+                <div *ngFor="let combo of block.combos" class="card-sub">{{ combo }}</div>
+              </div>
+              <div class="card-price">{{ block.price }}</div>
+            </header>
+          </article>
+        </div>
+      </ng-container>
+    </div>
+
+  </div>
+</section>

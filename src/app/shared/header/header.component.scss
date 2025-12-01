@@ -1,0 +1,258 @@
+.site-header {
+  /* overlay the hero image: centered, absolutely positioned */
+  position: absolute;
+  top: 6px; /* move pill closer to top edge */
+  left: 0;
+  right: 0;
+  z-index: 60;
+  padding: 0 var(--page-padding);
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* keep container non-interactive; buttons inside remain interactive via .nav-pill pointer-events:auto */
+  background: transparent; /* let the hero image show through */
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-shrink: 0; /* prevent shrinking */
+}
+
+.brand-logo {
+  height: 70px;  /* adjust as needed */
+  width: auto;   /* maintain aspect ratio */
+  display: block;
+}
+
+/* Keep the nav-pill sizing stable while visually enlarging the logo.
+   The wrapper has the same footprint as the original logo; the image
+   is scaled up via transform so it appears larger without changing layout. */
+.brand-logo-wrap {
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  line-height: 0; /* remove font line-gap */
+  overflow: visible; /* allow scaled image to overflow visually */
+  position: relative;
+}
+
+/* Position the actual image absolutely inside the small wrapper so we can visually enlarge it
+   without changing the wrapper/pill layout. This avoids layout reflow and prevents other
+   rules that set the image height from constraining the visual size. */
+.brand-logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform-origin: center center;
+  /* Use an explicit larger intrinsic width so the icon visibly grows while the
+     wrapper footprint remains the same. This is more robust than relying on
+     scale which some resets may override. */
+  transform: translate(-50%, -50%);
+  transition: transform 180ms ease, width 180ms ease;
+  will-change: transform, width;
+  z-index: 2; /* bring forward in case of stacking context */
+  display: block;
+  width: 130px; /* larger visual size (overflows the 70px wrapper) */
+  height: auto;
+  max-width: none;
+  max-height: none; /* avoid browser-imposed constraints */
+  transform-box: fill-box; /* improves transform behavior for SVGs */
+}
+
+
+.nav-pill {
+  width: min(1100px, 100%);
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center ;
+  gap: 2rem;
+  /* add extra left inset so the logo has breathing room from the pill's left rounded corner */
+  padding: 0.9rem 2.5rem 0.9rem 6.6rem;
+  border-radius: 999px;
+  background: rgba(20, 20, 20, 0.42); /* translucent dark base for glass */
+  backdrop-filter: blur(14px) saturate(110%);
+  -webkit-backdrop-filter: blur(14px) saturate(110%);
+  box-shadow:
+    0 30px 60px rgba(95, 86, 86, 0.55),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: auto;
+  
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.brand-mark {
+  background: var(--yellow);
+  color: #000000;
+  font-weight: 900;
+  padding: 0.55rem 1rem;
+  border-radius: 0.75rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.15rem;
+}
+
+.brand-name {
+  font-size: 1.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.brand-tagline {
+  font-size: 0.85rem;
+  color: #d3d3d3;
+}
+
+.nav-pill nav {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  font-weight: 600;
+  color: #ffffff;
+  flex-wrap: nowrap;
+  margin-left: auto;
+}
+
+.nav-pill nav a {
+  text-decoration: none;
+  color: #ffffff;
+  padding: 0.35rem 0.35rem;
+  border-radius: 999px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.nav-pill nav a:hover,
+.nav-pill nav a.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--yellow);
+}
+
+.site-header::before {
+  /* remove any visible top strip so background of page doesn't peek through */
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  pointer-events: none;
+  background: transparent;
+}
+
+@media (max-width: 640px) {
+  /* On small screens show logo + hamburger in one row and hide desktop links */
+  .nav-pill {
+    flex-direction: row;
+    gap: 0.5rem;
+    width: min(95%, 620px);
+    justify-content: space-between;
+    align-items: center;
+    /* keep left padding modest on mobile so the pill remains compact */
+    padding: 0.6rem 1rem 0.6rem 1.2rem;
+  }
+
+  /* hide the inline nav links (desktop) on small screens */
+  .nav-pill nav {
+    display: none;
+  }
+}
+
+/* Mobile hamburger and dropdown */
+.hamburger {
+  display: none; /* shown on small screens only */
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 1rem;
+}
+
+.mobile-dropdown {
+  position: absolute;
+  top: calc(100% + 0.4rem); /* anchor below the nav-pill */
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92%, 340px);
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  background: rgba(20, 20, 20, 0.98);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 220;
+  max-height: calc(100vh - 140px);
+  overflow-y: auto;
+}
+
+.mobile-dropdown a {
+  color: #fff;
+  text-decoration: none;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+}
+
+.mobile-dropdown a:hover {
+  background: rgba(255,255,255,0.06);
+  color: var(--yellow);
+}
+
+@media (max-width: 640px) {
+  /* hide desktop nav on small screens */
+  .desktop-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.03);
+    border-radius: 999px;
+    /* make the hamburger a bit smaller so the logo can be more prominent */
+    padding: 0.35rem;
+    height: 36px;
+    width: 36px;
+    font-size: 1.05rem; /* slightly smaller icon size */
+  }
+
+  /* ensure nav-pill stays relative so dropdown positioned correctly */
+  .nav-pill {
+    position: relative;
+  }
+
+  /* reduce visual scaling of the logo on small screens so it doesn't overlap the pill */
+  /* center logo vertically inside the pill on small screens */
+  .brand {
+    align-items: center; /* ensure parent flex alignment */
+  }
+
+  .brand-logo-wrap {
+    display: inline-flex; /* center content inside wrapper */
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+  }
+
+  .brand-logo {
+    /* ensure the image sits centered inside the wrapper */
+    transform: none !important;
+    position: static !important;
+    display: block !important;
+    margin: 0 auto !important;
+    height: 86px !important; /* slightly smaller than wrapper to add breathing room */
+    width: auto !important;
+    max-width: none !important;
+  }
+}

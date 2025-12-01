@@ -1,0 +1,133 @@
+.site-footer {
+  background: white;
+  color:black;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  padding-block: 3rem;
+}
+
+.footer-brand {
+  max-width: 260px;
+  /* center logo and social icons vertically and horizontally */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-mark {
+  display: inline-block;
+  background: var(--accent);
+  color: #000000;
+  font-weight: 900;
+  padding: 0.8rem 1.2rem;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  color: var(--yellow);
+}
+
+/* ensure footer headings are bold and not overridden by global styles */
+.site-footer h4 {
+  font-weight: 800;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: black;
+}
+
+.newsletter input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  border: none;
+  margin-bottom: 0.5rem;
+}
+
+.newsletter button {
+  width: 100%;
+  background: var(--yellow);
+  color: #000000;
+  border: none;
+  font-weight: 700;
+  padding: 0.85rem 1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+}
+
+.social-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.social-row a {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  color: var(--accent);
+  font-size: 18px;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.social-row a:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: rgba(255,255,255,0.12);
+}
+
+@media (max-width: 640px) {
+  .footer-grid {
+    text-align: center; /* center text for small screens */
+    padding-inline: 1rem;
+    /* reduce vertical padding so footer is more compact on phones */
+    padding-block: 1.25rem;
+    gap: 1.25rem;
+  }
+
+  .footer-brand {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 220px;
+  }
+
+  .brand-logo {
+    height: 56px;
+    width: auto;
+    display: block;
+    margin: 0 auto 0.75rem auto;
+  }
+
+  .social-row {
+    justify-content: center;
+    margin-bottom: 0.75rem;
+  }
+
+  /* slightly smaller social buttons on phones to reduce vertical footprint */
+  .social-row a {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .newsletter input,
+  .newsletter button {
+    border-radius: 999px;
+  }
+}
